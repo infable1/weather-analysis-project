@@ -80,3 +80,29 @@ for city in cities:
         wind_speed_avg = filtered_df['Wind_Speed_kmh'].mean()
         data_sheet['B4'] = wind_speed_avg
         data_sheet['B4'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        
+        unique_dates = list(set(filtered_df['Date']))
+        unique_dates.sort()
+        
+        j = 1
+        
+        for date in unique_dates:
+            data_sheet['A6'].value = 'Date'
+            data_sheet['A6'].font = Font(bold=True)
+            data_sheet['A6'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            data_sheet['B6'].value = 'Average temperature (°C)'
+            data_sheet['B6'].font = Font(bold=True)
+            data_sheet['B6'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            data_sheet['C6'].value = 'Average humidity (%)'
+            data_sheet['C6'].font = Font(bold=True)
+            data_sheet['C6'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            data_sheet['D6'].value = 'Average precipitation (mm)'
+            data_sheet['D6'].font = Font(bold=True)
+            data_sheet['D6'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            data_sheet['E6'].value = 'Average wind speed (km/h)'
+            data_sheet['E6'].font = Font(bold=True)
+            data_sheet['E6'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
