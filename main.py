@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 from openpyxl import Workbook
@@ -12,7 +11,6 @@ def remove_empty_folders(root_path):
             folder_to_check = os.path.join(dirpath, dirname)
             if not os.listdir(folder_to_check):
                 os.rmdir(folder_to_check)
-                print(f"Удалена пустая папка: {folder_to_check}")
 
 df = pd.read_csv('weather_data.csv')
 df = df.dropna()
@@ -141,7 +139,32 @@ for city in cities:
             j += 1
             
             wb.save(f'Analyzed/{city}/{months[i].capitalize()}/{months[i].capitalize()}.xlsx')
-
+            
+            fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, figsize=(12, 12), sharex=True)
+        
+            ax1.plot(day_df['Time'], day_df['Temperature_C'], color='blue', marker='o')
+            ax1.set_ylabel('Temperature (°C)')
+            ax1.grid(True)
+            ax1.set_title(f'Weather in {city} for {date}')
+            
+            ax2.plot(day_df['Time'], day_df['Humidity_pct'], color='green', marker='s')
+            ax2.set_ylabel('Humidity (%)')
+            ax2.grid(True)
+            
+            ax3.plot(day_df['Time'], day_df['Precipitation_mm'], color='red', marker='^')
+            ax3.set_ylabel('Precipitation (mm)')
+            ax3.grid(True)
+            
+            ax4.plot(day_df['Time'], day_df['Wind_Speed_kmh'], color='yellow', marker='D')
+            ax4.set_ylabel('Wind Speed (km/h)')
+            ax4.set_xlabel('Time')
+            ax4.grid(True)
+            
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+            plt.savefig(f'Analyzed/{city}/{months[i].capitalize()}/{date}.png')
+            plt.close()
+            
 root_folder = "Analyzed"
 if os.path.exists(root_folder):
     remove_empty_folders(root_folder)
