@@ -106,3 +106,29 @@ for city in cities:
             data_sheet['E6'].value = 'Average wind speed (km/h)'
             data_sheet['E6'].font = Font(bold=True)
             data_sheet['E6'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            day_df = filtered_df[filtered_df['Date'] == date].sort_values(by='Time')
+            
+            data_sheet[f'A{j + 6}'] = date
+            data_sheet[f'A{j + 6}'].font = Font(bold=True)
+            data_sheet[f'A{j + 6}'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            temperature_avg = day_df['Temperature_C'].mean()
+            data_sheet[f'B{j + 6}'] = temperature_avg
+            data_sheet[f'B{j + 6}'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            humididty_avg = day_df['Humidity_pct'].mean()
+            data_sheet[f'C{j + 6}'] = humididty_avg
+            data_sheet[f'C{j + 6}'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            precipitation_avg = day_df['Precipitation_mm'].mean()
+            data_sheet[f'D{j + 6}'] = precipitation_avg
+            data_sheet[f'D{j + 6}'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            wind_speed_avg = day_df['Wind_Speed_kmh'].mean()
+            data_sheet[f'E{j + 6}'] = wind_speed_avg
+            data_sheet[f'E{j + 6}'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            
+            j += 1
+            
+            wb.save(f'Analyzed/{city}/{months[i].capitalize()}/{months[i].capitalize()}.xlsx')
