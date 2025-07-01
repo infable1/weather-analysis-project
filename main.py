@@ -4,6 +4,15 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment
+import os
+
+def remove_empty_folders(root_path):
+    for dirpath, dirnames, filenames in os.walk(root_path, topdown=False):
+        for dirname in dirnames:
+            folder_to_check = os.path.join(dirpath, dirname)
+            if not os.listdir(folder_to_check):
+                os.rmdir(folder_to_check)
+                print(f"Удалена пустая папка: {folder_to_check}")
 
 df = pd.read_csv('weather_data.csv')
 df = df.dropna()
@@ -132,3 +141,7 @@ for city in cities:
             j += 1
             
             wb.save(f'Analyzed/{city}/{months[i].capitalize()}/{months[i].capitalize()}.xlsx')
+
+root_folder = "Analyzed"
+if os.path.exists(root_folder):
+    remove_empty_folders(root_folder)
