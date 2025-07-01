@@ -46,3 +46,19 @@ for city in cities:
     
     for i in range(1, 13):
         Path(f'Analyzed/{city}/{months[i].capitalize()}').mkdir(exist_ok=True)
+        
+        data_sheet['A1'].value = 'Average temperature for the month (°C)'
+        data_sheet['A1'].font = Font(bold=True)
+        data_sheet['A1'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        
+        data_sheet['A2'].value = 'Average humidity for the month (%)'
+        data_sheet['A2'].font = Font(bold=True)
+        data_sheet['A2'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        
+        data_sheet['A3'].value = 'Average monthly precipitation (mm)'
+        data_sheet['A3'].font = Font(bold=True)
+        data_sheet['A3'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        
+        data_sheet['A4'].value = 'Average wind speed for the month (km/h)'
+        data_sheet['A4'].font = Font(bold=True)
+        data_sheet['A4'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
