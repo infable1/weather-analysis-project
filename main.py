@@ -11,6 +11,21 @@ df = df.dropna()
 cities = list(set(df['Location']))
 cities.sort()
 
+months = {
+    1: 'january',
+    2: 'february',
+    3: 'march',
+    4: 'april',
+    5: 'may',
+    6: 'june',
+    7: 'july',
+    8: 'august',
+    9: 'september',
+    10: 'october',
+    11: 'november',
+    12: 'december'
+}
+
 df['Date_Time'] = pd.to_datetime(df['Date'] + ' ' + df['Time'])
 
 wb = Workbook()
@@ -28,3 +43,6 @@ for city in cities:
 
     filtered_df = df[df['Location'] == city]
     filtered_df = filtered_df.sort_values(by='Date')
+    
+    for i in range(1, 13):
+        Path(f'Analyzed/{city}/{months[i].capitalize()}').mkdir(exist_ok=True)
