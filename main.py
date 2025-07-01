@@ -25,3 +25,6 @@ data_sheet = wb['All month long']
 
 for city in cities:
     Path(f'Analyzed/{city}').mkdir(exist_ok=True)
+
+    filtered_df = df[df['Location'] == city]
+    filtered_df = filtered_df.sort_values(by='Date')
