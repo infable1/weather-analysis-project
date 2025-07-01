@@ -62,3 +62,21 @@ for city in cities:
         data_sheet['A4'].value = 'Average wind speed for the month (km/h)'
         data_sheet['A4'].font = Font(bold=True)
         data_sheet['A4'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        
+        filtered_df = df[(df['Location'] == city) & (df['Date_Time'].dt.month == i)]
+        
+        temperature_avg = filtered_df['Temperature_C'].mean()
+        data_sheet['B1'] = temperature_avg
+        data_sheet['B1'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        
+        humididty_avg = filtered_df['Humidity_pct'].mean()
+        data_sheet['B2'] = humididty_avg
+        data_sheet['B2'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        
+        precipitation_avg = filtered_df['Precipitation_mm'].mean()
+        data_sheet['B3'] = precipitation_avg
+        data_sheet['B3'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        
+        wind_speed_avg = filtered_df['Wind_Speed_kmh'].mean()
+        data_sheet['B4'] = wind_speed_avg
+        data_sheet['B4'].alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
